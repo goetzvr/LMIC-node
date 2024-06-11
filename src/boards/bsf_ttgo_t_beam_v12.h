@@ -20,6 +20,7 @@
  *                The AXP2101 must be correctly configured for things to work
  *                (see boardInit() below).
  * 
+ *                Connect an optional display according to below connection details.
  * 
  *                CONNECTIONS AND PIN DEFINITIONS:
  *                
@@ -184,6 +185,12 @@ bool initPMU() {
         //GNSS VDD 3300mV
         PMU->setPowerChannelVoltage(XPOWERS_ALDO3, 3300);
         PMU->enablePowerOutput(XPOWERS_ALDO3);
+
+        // Charging
+        PMU->setChargerConstantCurr(XPOWERS_AXP2101_CHG_CUR_800MA);
+
+        // Set charge cut-off voltage
+        PMU->setChargeTargetVoltage(XPOWERS_AXP2101_CHG_VOL_4V2);
 
 #endif /*CONFIG_IDF_TARGET_ESP32*/
 
